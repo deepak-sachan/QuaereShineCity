@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Shine City</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_pager_sliding_view">PagerSlidingViewActivity</string>
+    <string name="title_activity_pagersliding">PagerslidingActivity</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="reedam_fragment">Reedam Fragment</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_tab">TabActivity</string>
+    <string name="title_activity_statement_pager_sliding">StatementPagerSlidingActivity</string>
+    <string name="title_activity_datewise_transaction">DatewiseTransaction</string>
+    <string name="title_activity_main2">Main2Activity</string>
+</resources>
