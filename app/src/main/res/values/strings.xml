@@ -15,4 +15,5 @@
     <string name="title_activity_statement_pager_sliding">StatementPagerSlidingActivity</string>
     <string name="title_activity_datewise_transaction">DatewiseTransaction</string>
     <string name="title_activity_main2">Main2Activity</string>
+    <string name="title_activity_user_profile">UserProfileActivity</string>
 </resources>

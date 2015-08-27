@@ -28,7 +28,7 @@ public class AccountAdapter extends ArrayAdapter<String> {
     public View getView(int position, View convertView, ViewGroup parent) {
 
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View rowView = inflater.inflate(R.layout.fragment_account, null, true);
+        View rowView = inflater.inflate(R.layout.myaccountadapter, null, true);
 
         TextView txtTitle = (TextView) rowView.findViewById(R.id.txt_account);
         ImageView imageView = (ImageView) rowView.findViewById(R.id.iv_account);

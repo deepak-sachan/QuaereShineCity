@@ -27,7 +27,7 @@ public class LoginFragment extends android.support.v4.app.Fragment {
     private Button loginbutton;
     private EditText edname;
     private EditText edpassword;
-
+    public  String response;
     public LoginFragment() {
         // Required empty public constructor
     }
@@ -54,15 +54,16 @@ public class LoginFragment extends android.support.v4.app.Fragment {
                 String password = edpassword.getText().toString();
                 if (CheckNetwork.isInternetAvailable(getActivity().getApplication())) //returns true if internet available
                 {
-                    String url = "http://demo8.mlmsoftindia.com/ShinePanel.svc/Shinecity/"+userName+"/"+password;
+                    String url = "http://cp.shinecityinfra.in/SCServices.svc/VendorLogin/"+userName+"/"+password;
                     Log.v(TAG, "ghhhhhhhhhk" + url);
                     new UserLoginTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, url);
 
                      // startActivity(new Intent(getActivity(), PagerslidingActivity.class));
 
-                } else
+                } else {
                     getFragmentManager().beginTransaction().replace(R.id.fragment, new NoConnectionFragment()).commit();
                     Toast.makeText(getActivity(), "No Internet Connection", Toast.LENGTH_LONG).show();
+                }
 
             }
 
@@ -87,20 +88,21 @@ public class LoginFragment extends android.support.v4.app.Fragment {
             String password = params[1];*/
 
             //  String url = "http://demo8.mlmsoftindia.com/ShinePanel.svc/Shinecity/TOWJ146/business";
-            String response = HttpAgent.get(params[0]);
+             response = HttpAgent.get(params[0]);
             // AuthenticationResponse authResponse = null;
             String s = response;
             if (response != null) {
-
+             UserProfileActivity.getString(response);
                 //  startActivity(new Intent(getActivity(),PagerslidingActivity.class));
             }
             return response;
         }
 
         @Override
-        protected void onPostExecute(String response) {
-            if (response != null) {
-                String s = response.toString();
+        protected void onPostExecute(String response2) {
+            if (response2 != null) {
+                response = response2.toString();
+
                 super.onPostExecute(response);
 
                 startActivity(new Intent(getActivity(), PagerslidingActivity.class));
