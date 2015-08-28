@@ -12,7 +12,6 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.quaere.deepak.quaereshinecity.Db.DbHandler;
-import com.quaere.deepak.quaereshinecity.DbTable.Profile;
 
 
 public class LoginFragment extends android.support.v4.app.Fragment {

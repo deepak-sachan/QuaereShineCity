@@ -9,7 +9,7 @@ import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.RuntimeExceptionDao;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
-import com.quaere.deepak.quaereshinecity.DbTable.Profile;
+import com.quaere.deepak.quaereshinecity.DbTable.UserProfile;
 
 import java.sql.SQLException;
 
@@ -18,11 +18,11 @@ import java.sql.SQLException;
  */
 public class DbHelper extends OrmLiteSqliteOpenHelper {
     private static final String TAG = DbHelper.class.getSimpleName();
-    private static final String DATABASE_NAME = "mydatabase.db";
-    private static final int DATABASE_VERSION = 2;
+    private static final String DATABASE_NAME = "myshinecity.db";
+    private static final int DATABASE_VERSION = 6;
 
-    private Dao<Profile,Integer> userProfiles = null;
-    private RuntimeExceptionDao<Profile,Integer> userProfileStringRuntimeExceptionDao= null;
+    private Dao<UserProfile,Integer> userProfiles = null;
+    private RuntimeExceptionDao<UserProfile,Integer> StringRuntimeExceptionDao= null;
 
     public DbHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -31,7 +31,7 @@ public class DbHelper extends OrmLiteSqliteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase, ConnectionSource cs) {
         try {
-            TableUtils.createTable(cs, Profile.class);
+            TableUtils.createTable(cs, UserProfile.class);
         } catch (SQLException e) {
             Log.e(TAG, "create table ..........");
         }
@@ -40,18 +40,19 @@ public class DbHelper extends OrmLiteSqliteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, ConnectionSource cs, int i, int i1) {
         try {
-            TableUtils.dropTable(cs, Profile.class, true);
+            TableUtils.dropTable(cs, UserProfile.class, true);
         } catch (SQLException e) {
             Log.e(TAG,"drop table .........");
         }
     }
 
-    public Dao<Profile, Integer> geUserProfilesDao() throws SQLException{
+    public Dao<UserProfile,Integer> geUserProfilesDao() throws SQLException{
         if(userProfiles == null){
-            userProfiles = getDao(Profile.class);
+            userProfiles = getDao(UserProfile.class);
         }
         return userProfiles;
     }
+
 
     @Override
     public void close() {

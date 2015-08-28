@@ -10,7 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.quaere.deepak.quaereshinecity.Db.DbHandler;
-import com.quaere.deepak.quaereshinecity.DbTable.Profile;
+import com.quaere.deepak.quaereshinecity.DbTable.UserProfile;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         DbHandler.startIfNotStarted(this);
-        Profile userProfile = DbHandler.dbHandler.getuserProfileList();
+        UserProfile userProfile = DbHandler.dbHandler.getuserProfileList();
         if(userProfile != null){
             startActivity(new Intent(this, PagerslidingActivity.class));
             finish();
