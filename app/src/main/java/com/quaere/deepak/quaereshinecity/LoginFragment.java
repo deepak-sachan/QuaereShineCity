@@ -1,11 +1,8 @@
 package com.quaere.deepak.quaereshinecity;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,11 +11,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import org.apache.http.NameValuePair;
-import org.apache.http.message.BasicNameValuePair;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.quaere.deepak.quaereshinecity.Db.DbHandler;
+import com.quaere.deepak.quaereshinecity.DbTable.Profile;
 
 
 public class LoginFragment extends android.support.v4.app.Fragment {
@@ -31,6 +25,8 @@ public class LoginFragment extends android.support.v4.app.Fragment {
     public LoginFragment() {
         // Required empty public constructor
     }
+
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -49,16 +45,16 @@ public class LoginFragment extends android.support.v4.app.Fragment {
         loginbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                DbHandler.startIfNotStarted(getActivity());
                 String userName = edname.getText().toString();
                 String password = edpassword.getText().toString();
                 if (CheckNetwork.isInternetAvailable(getActivity().getApplication())) //returns true if internet available
                 {
-                    String url = "http://cp.shinecityinfra.in/SCServices.svc/VendorLogin/"+userName+"/"+password;
+                    String url = "http://cp.shinecityinfra.in/SCServices.svc/VendorLogin/" + userName + "/" + password;
                     Log.v(TAG, "ghhhhhhhhhk" + url);
                     new UserLoginTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, url);
 
-                     // startActivity(new Intent(getActivity(), PagerslidingActivity.class));
+                    // startActivity(new Intent(getActivity(), PagerslidingActivity.class));
 
                 } else {
                     getFragmentManager().beginTransaction().replace(R.id.fragment, new NoConnectionFragment()).commit();
@@ -68,6 +64,8 @@ public class LoginFragment extends android.support.v4.app.Fragment {
             }
 
         });
+
+
         return view;
     }
 
@@ -92,7 +90,9 @@ public class LoginFragment extends android.support.v4.app.Fragment {
             // AuthenticationResponse authResponse = null;
             String s = response;
             if (response != null) {
-             UserProfileActivity.getString(response);
+                  UserProfileActivity.getString(response);
+
+
                 //  startActivity(new Intent(getActivity(),PagerslidingActivity.class));
             }
             return response;
@@ -106,6 +106,7 @@ public class LoginFragment extends android.support.v4.app.Fragment {
                 super.onPostExecute(response);
 
                 startActivity(new Intent(getActivity(), PagerslidingActivity.class));
+               getActivity().finish();
 
             }else{
                 Toast.makeText(getActivity(),"invalid username or password",Toast.LENGTH_LONG).show();

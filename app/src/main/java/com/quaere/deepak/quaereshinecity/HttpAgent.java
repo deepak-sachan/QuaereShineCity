@@ -58,7 +58,7 @@ public class HttpAgent {
      * @param params List of name:value pairs to sent with the request as post data
      * @return String response of the post request
      */
-    public static final String post(String url, List<NameValuePair> params) {
+    public static final String post(String url) {
         String response = null;
         Log.e(TAG,"sending post reqeust={}, params={}");
         final HttpParams httpParams = new BasicHttpParams();
@@ -66,7 +66,7 @@ public class HttpAgent {
         HttpClient httpClient = new DefaultHttpClient(httpParams);
         try {
             HttpPost httpPost = new HttpPost(url);
-            httpPost.setEntity(new UrlEncodedFormEntity(params));
+          //  httpPost.setEntity(new UrlEncodedFormEntity(params));
             ResponseHandler<String> responseHandler = new BasicResponseHandler();
             response = httpClient.execute(httpPost, responseHandler);
         } catch (Exception e) {

@@ -1,4 +1,4 @@
-package com.quaere.deepak.quaereshinecity;
+package com.quaere.deepak.quaereshinecity.Db;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -9,6 +9,7 @@ import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.RuntimeExceptionDao;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
+import com.quaere.deepak.quaereshinecity.DbTable.Profile;
 
 import java.sql.SQLException;
 
@@ -18,10 +19,10 @@ import java.sql.SQLException;
 public class DbHelper extends OrmLiteSqliteOpenHelper {
     private static final String TAG = DbHelper.class.getSimpleName();
     private static final String DATABASE_NAME = "mydatabase.db";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
 
-    private Dao<UserProfile,Integer> userProfiles = null;
-    private RuntimeExceptionDao<UserProfile,Integer> userProfileStringRuntimeExceptionDao= null;
+    private Dao<Profile,Integer> userProfiles = null;
+    private RuntimeExceptionDao<Profile,Integer> userProfileStringRuntimeExceptionDao= null;
 
     public DbHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -30,7 +31,7 @@ public class DbHelper extends OrmLiteSqliteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase, ConnectionSource cs) {
         try {
-            TableUtils.createTable(cs, UserProfile.class);
+            TableUtils.createTable(cs, Profile.class);
         } catch (SQLException e) {
             Log.e(TAG, "create table ..........");
         }
@@ -39,15 +40,15 @@ public class DbHelper extends OrmLiteSqliteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, ConnectionSource cs, int i, int i1) {
         try {
-            TableUtils.dropTable(cs, UserProfile.class, true);
+            TableUtils.dropTable(cs, Profile.class, true);
         } catch (SQLException e) {
             Log.e(TAG,"drop table .........");
         }
     }
 
-    public Dao<UserProfile, Integer> getUserProfiles() throws SQLException{
+    public Dao<Profile, Integer> geUserProfilesDao() throws SQLException{
         if(userProfiles == null){
-            userProfiles = getDao(UserProfile.class);
+            userProfiles = getDao(Profile.class);
         }
         return userProfiles;
     }
@@ -55,6 +56,7 @@ public class DbHelper extends OrmLiteSqliteOpenHelper {
     @Override
     public void close() {
         super.close();
+        userProfiles=null;
     }
 }
 

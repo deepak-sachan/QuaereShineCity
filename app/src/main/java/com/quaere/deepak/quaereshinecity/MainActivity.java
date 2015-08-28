@@ -1,5 +1,6 @@
 package com.quaere.deepak.quaereshinecity;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.ActionBar;
@@ -7,6 +8,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import com.quaere.deepak.quaereshinecity.Db.DbHandler;
+import com.quaere.deepak.quaereshinecity.DbTable.Profile;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -23,6 +27,18 @@ public class MainActivity extends AppCompatActivity {
         actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#88236c")));
 
         setContentView(R.layout.activity_main);
+
+
+        DbHandler.startIfNotStarted(this);
+        Profile userProfile = DbHandler.dbHandler.getuserProfileList();
+        if(userProfile != null){
+            startActivity(new Intent(this, PagerslidingActivity.class));
+            finish();
+
+        }else
+
+
+
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.fragment, new LoginFragment())
