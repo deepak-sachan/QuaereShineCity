@@ -6,8 +6,11 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 import com.astuetz.PagerSlidingTabStrip;
 import com.quaere.deepak.quaereshinecity.Adapter.SampleFragmentPagerAdapter;
@@ -23,6 +26,18 @@ public class PagerslidingActivity extends AppCompatActivity {
         actionBar.setDisplayUseLogoEnabled(true);
         actionBar.setDisplayShowHomeEnabled(true);
         actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#88236c")));
+
+    /*    ActionBar mActionBar = getSupportActionBar();
+        mActionBar.setDisplayShowHomeEnabled(false);
+        mActionBar.setDisplayShowTitleEnabled(false);
+        LayoutInflater mInflater = LayoutInflater.from(this);
+
+        View mCustomView = mInflater.inflate(R.layout.custom_actionbar, null);
+        TextView mTitleTextView = (TextView) mCustomView.findViewById(R.id.title_text);
+        mTitleTextView.setText("My Own Title");
+
+        mActionBar.setCustomView(mCustomView);
+        mActionBar.setDisplayShowCustomEnabled(true);*/
 
 
         setContentView(R.layout.activity_pagersliding);

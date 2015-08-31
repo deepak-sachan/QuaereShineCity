@@ -11,6 +11,7 @@ import android.view.MenuItem;
 
 import com.quaere.deepak.quaereshinecity.Db.DbHandler;
 import com.quaere.deepak.quaereshinecity.DbTable.UserProfile;
+import com.squareup.otto.Subscribe;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -31,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
 
         DbHandler.startIfNotStarted(this);
         UserProfile userProfile = DbHandler.dbHandler.getuserProfileList();
-        if(userProfile != null){
+        if(userProfile!= null){
             startActivity(new Intent(this, PagerslidingActivity.class));
             finish();
 
@@ -46,7 +47,19 @@ public class MainActivity extends AppCompatActivity {
 
         }
     }
+@Subscribe
+public void busdata(UserProfile profile){
+   String id =   profile.getVenderid();
+    String balance = profile.getBalance();
+    DbHandler.dbHandler.saveUserProfile(new UserProfile(id, balance));
+}
 
+
+    @Override
+    protected void onPause() {
+        UserProfileActivity.BUS.unregister(this);
+        super.onPause();
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

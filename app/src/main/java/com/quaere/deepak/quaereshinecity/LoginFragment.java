@@ -47,6 +47,10 @@ public class LoginFragment extends android.support.v4.app.Fragment {
                 DbHandler.startIfNotStarted(getActivity());
                 String userName = edname.getText().toString();
                 String password = edpassword.getText().toString();
+                if (userName.length() == 0 || password.length() == 0) {
+                    Toast.makeText(getActivity().getApplicationContext(), "Enter Username and password", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 if (CheckNetwork.isInternetAvailable(getActivity().getApplication())) //returns true if internet available
                 {
                     String url = "http://cp.shinecityinfra.in/SCServices.svc/VendorLogin/" + userName + "/" + password;
@@ -103,7 +107,7 @@ public class LoginFragment extends android.support.v4.app.Fragment {
                 response = response2.toString();
 
                 super.onPostExecute(response);
-
+                DbHandler.startIfNotStarted(getActivity());
                 startActivity(new Intent(getActivity(), PagerslidingActivity.class));
                getActivity().finish();
 
@@ -114,6 +118,11 @@ public class LoginFragment extends android.support.v4.app.Fragment {
         }
     }
 
+    @Override
+    public void onStart() {
+        UserProfileActivity.BUS.register(getActivity());
+        super.onStart();
+    }
 
 
 }
