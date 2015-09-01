@@ -18,8 +18,8 @@ import java.sql.SQLException;
  */
 public class DbHelper extends OrmLiteSqliteOpenHelper {
     private static final String TAG = DbHelper.class.getSimpleName();
-    private static final String DATABASE_NAME = "shinecity.db";
-    private static final int DATABASE_VERSION = 7;
+    private static final String DATABASE_NAME = "shinecity1.db";
+    private static final int DATABASE_VERSION = 10;
 
     private Dao<UserProfile,Integer> userProfiles = null;
     private RuntimeExceptionDao<UserProfile,Integer> StringRuntimeExceptionDao= null;

@@ -14,30 +14,50 @@ import android.widget.TextView;
 
 import com.astuetz.PagerSlidingTabStrip;
 import com.quaere.deepak.quaereshinecity.Adapter.SampleFragmentPagerAdapter;
+import com.quaere.deepak.quaereshinecity.Db.DbHandler;
+import com.quaere.deepak.quaereshinecity.DbTable.UserProfile;
+import com.squareup.otto.Subscribe;
 
 public class PagerslidingActivity extends AppCompatActivity {
+    String username;
+    String id;
+    String balance1;
+    @Override
+    protected void onResume() {
+        UserProfileActivity.BUS.register(this);
+        super.onResume();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ActionBar actionBar = getSupportActionBar();
+      /*  ActionBar actionBar = getSupportActionBar();
         actionBar.setLogo(R.drawable.contact);
         actionBar.setTitle("Demo");
         actionBar.setDisplayUseLogoEnabled(true);
         actionBar.setDisplayShowHomeEnabled(true);
-        actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#88236c")));
+        actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#88236c")));*/
 
-    /*    ActionBar mActionBar = getSupportActionBar();
+        ActionBar mActionBar = getSupportActionBar();
         mActionBar.setDisplayShowHomeEnabled(false);
         mActionBar.setDisplayShowTitleEnabled(false);
         LayoutInflater mInflater = LayoutInflater.from(this);
-
         View mCustomView = mInflater.inflate(R.layout.custom_actionbar, null);
-        TextView mTitleTextView = (TextView) mCustomView.findViewById(R.id.title_text);
-        mTitleTextView.setText("My Own Title");
+        TextView txtid = (TextView) mCustomView.findViewById(R.id.id);
+        TextView balance = (TextView) mCustomView.findViewById(R.id.balance);
+        DbHandler.startIfNotStarted(this);
+        UserProfile userProfile = DbHandler.dbHandler.getuserProfileList();
+        if( userProfile != null) {
+            username = DbHandler.dbHandler.getuserProfileList().getUsername();
+            id = DbHandler.dbHandler.getuserProfileList().getVenderid();
+            balance1 = DbHandler.dbHandler.getuserProfileList().getBalance();
+            txtid.setText(username);
+            balance.setText(balance1);
+        }
 
         mActionBar.setCustomView(mCustomView);
-        mActionBar.setDisplayShowCustomEnabled(true);*/
+        mActionBar.setDisplayShowCustomEnabled(true);
+        mActionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#88236c")));
 
 
         setContentView(R.layout.activity_pagersliding);
@@ -51,7 +71,7 @@ public class PagerslidingActivity extends AppCompatActivity {
     }
 
 
-    @Override
+  /*  @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_pagersliding, menu);
@@ -71,7 +91,7 @@ public class PagerslidingActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
-    }
+    }*/
 
     @Override
     public void onBackPressed() {

@@ -49,9 +49,10 @@ public class MainActivity extends AppCompatActivity {
     }
 @Subscribe
 public void busdata(UserProfile profile){
+    String username = profile.getUsername();
    String id =   profile.getVenderid();
     String balance = profile.getBalance();
-    DbHandler.dbHandler.saveUserProfile(new UserProfile(id, balance));
+    DbHandler.dbHandler.saveUserProfile(new UserProfile(username,id, balance));
 }
 
 
